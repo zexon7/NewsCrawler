@@ -33,7 +33,7 @@ articleAll = '\n'.join(article)
 #jieba.load_userdict('/user_dict.txt') # 輸入自己字典的路徑
 
 #remove apostrophes/symbol
-clean_article = articleAll.replace('[^\w\s]','').replace('\r\n','').replace('／',"").replace('《','').replace('》','').replace('，','').replace('。','').replace('「','').replace('」','').replace('（','').replace('）','').replace('(','').replace(')','').replace('！','').replace('？','').replace('、','').replace('▲','').replace('…','').replace('：','')
+clean_article = articleAll.replace('[^\w\s]','').replace('\r\n','').replace('／','').replace('【','').replace('】','').replace('《','').replace('》','').replace('，','').replace('。','').replace('「','').replace('」','').replace('（','').replace('）','').replace('(','').replace(')','').replace('！','').replace('？','').replace('、','').replace('▲','').replace('…','').replace('：','')
 #print(clean_article)
 
 #避免過多的文字log訊息出現

@@ -40,5 +40,5 @@ df = pd.DataFrame({
 })
 
 #show full data frame setting
-pd.set_option("display.max_rows", None,"display.width", None,'display.max_colwidth', -1)
-print(df)
+#pd.set_option("display.max_rows", None,"display.width", None,'display.max_colwidth', None)
+print(df.head())
