@@ -18,6 +18,8 @@ html = BeautifulSoup(data,"html.parser")
 
 #search for class
 titles_data = html.find_all("a",class_="DY5T1d")
+titles_source = html.find_all("a",class_="wEwyrc AVN2gc uQIVzc Sksgp")
+titles_time = html.find_all("time",class_="WW6dff uQIVzc Sksgp")
 #print(titles)
 c = 0
 '''
@@ -30,15 +32,22 @@ for title in titles:
 '''
 
 #put string and url into a list
-titles_list = [t.string for t in titles_data]
+title_list = [t.string for t in titles_data]
 url_list = ["https://news.google.com"+t.get("href")for t in titles_data]
+source_list = [s.string for s in titles_source]
+title_time = [t.get("datetime") for t in titles_time ]
 
 #create a data frame
 df = pd.DataFrame({
-    'title': titles_list,
-    'links': url_list
+    'title': title_list,
+    'source': source_list,
+    'time': title_time,
+    'link': url_list
 })
 
 #show full data frame setting
-#pd.set_option("display.max_rows", None,"display.width", None,'display.max_colwidth', None)
-print(df.head())
+#pd.set_option("display.max_rows", None,'display.max_columns', None,'display.max_colwidth', None)
+#print(df.head())
+
+pd.set_option('max_colwidth',100)
+display(df.head())
