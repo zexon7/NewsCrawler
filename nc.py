@@ -21,15 +21,6 @@ titles_data = html.find_all("a",class_="DY5T1d")
 titles_source = html.find_all("a",class_="wEwyrc AVN2gc uQIVzc Sksgp")
 titles_time = html.find_all("time",class_="WW6dff uQIVzc Sksgp")
 #print(titles)
-c = 0
-'''
-for title in titles:
-    if c < 2:
-        print(title.string)
-        print("https://news.google.com"+title.get("href"))
-        print("\n")
-        c+=1
-'''
 
 #put string and url into a list
 title_list = [t.string for t in titles_data]
