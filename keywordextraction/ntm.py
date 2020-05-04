@@ -39,7 +39,11 @@ clean_article = articleAll.replace('[^\w\s]','').replace('\r\n','').replace('／
 #避免過多的文字log訊息出現
 jieba.setLogLevel(20)
 # 設定停用字詞 
-stopwords = {}.fromkeys(["也","但","來","個","再","的","和","是","有","更","會","可能","有何","從","對","就", '\n','越','為','這種','多','越來',' '])
+#stopwords = {}.fromkeys(["也","但","來","個","再","的","和","是","有","更","會","可能","有何","從","對","就", '\n','越','為','這種','多','越來',' '])
+stopwords = [' ']
+for word in open('stopwords.txt', 'r', encoding='utf-8'):
+    stopwords.append(word.strip())
+
 
 #mode for reference
 '''
@@ -69,5 +73,5 @@ for item in Sentence:
         hash[item] = 1
 
 #create a data frame
-artDf = pd.DataFrame.from_dict(hash, orient='index', columns = ['詞頻'])
-print(artDf.head(10).sort_values(by = ['詞頻'], ascending = False))
+df = pd.DataFrame.from_dict(hash, orient='index', columns = ['詞頻'])
+print(df.head(10).sort_values(by = ['詞頻'], ascending = False))
