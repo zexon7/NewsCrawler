@@ -41,4 +41,4 @@ df = pd.DataFrame({
 #print(df.head())
 
 pd.set_option('max_colwidth',100)
-display(df.head())
+print(df.head())
