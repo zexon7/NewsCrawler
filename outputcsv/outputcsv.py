@@ -28,7 +28,8 @@ def createDataFrame(t):
     else:
         put 'other'
     '''
-    df['tag'] = np.where(cond1, 'fake', np.where(cond2, 'partial error', 'other') )
+    df['tag'] = np.where(cond1, 'fake', np.where(cond2, 'partial error', 'other'))
+    df = df[['tag','title']]
     
 def getData(url):
     #set user agent
@@ -51,7 +52,7 @@ def getData(url):
     return nextpage["href"]
     time.sleep(5)
 
-def main(): 
+def outputCsv(): 
     #input news article URL
     #錯誤https://tfc-taiwan.org.tw/articles/category/26/27
     #部分錯誤https://tfc-taiwan.org.tw/articles/category/26/28
@@ -63,12 +64,15 @@ def main():
         #get next page URL from getData function
         fakeURL = "https://tfc-taiwan.org.tw" + getData(fakeURL)   
         c+=1
+        time.sleep(2)
     
     for i in range(2):
         partial_errorURL = "https://tfc-taiwan.org.tw" + getData(partial_errorURL)
+        time.sleep(2)
     
-    pd.set_option('max_colwidth',100)    
-    display(df)
+    df['title'] = df['title'].str.replace('【錯誤】','').str.replace('【部分錯誤】','').str.replace('網傳','')
+    #pd.set_option('max_colwidth',100)    
+    #display(df)
     
     #output csv file
     path = ""
@@ -80,6 +84,7 @@ def sleeptime(h,m,s):
 #update every 6 hours
 second = sleeptime(6,0,0)
 
-while True:  
-    main()
-    time.sleep(second)
+if __name__ == '__main__':
+    while True:  
+        outputCsv()
+        time.sleep(second)
