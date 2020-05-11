@@ -28,7 +28,7 @@ def createDataFrame(t):
     else:
         put 'other'
     '''
-    df['tag'] = np.where(cond1, 'fake', np.where(cond2, 'partial error', 'other'))
+    df['tag'] = np.where(cond1, '__label__fake', np.where(cond2, '__label__partial error', '__label__other'))
     df = df[['tag','title']]
     
 def getData(url):
@@ -76,7 +76,7 @@ def outputCsv():
     
     #output csv file
     path = ""
-    df.to_csv(path + 'data.csv', encoding='utf_8_sig')
+    df.to_csv(path + 'data.csv', encoding='utf_8_sig', index=False, header=False)
 
 def sleeptime(h,m,s):
     return h*3600 + m*60 + s
